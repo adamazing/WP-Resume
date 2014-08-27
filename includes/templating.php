@@ -23,8 +23,8 @@ class WP_Resume_Templating {
 		$this->parent = &$parent;
 
 		$this->author = &$parent->author;
-		
-		//$this->author_id = &$parent->author_id;		
+			
+		$this->author_id = get_the_author_meta('ID');
 
 		add_action( 'plugins_loaded', array( &$this, 'i18n_init' ) );
 	}
@@ -50,7 +50,7 @@ class WP_Resume_Templating {
 	 */
 	function get_name() {
 
-		$this->author_id = the_author_meta('ID');
+		$this->author_id = get_the_author_meta('ID');
 		$name = $this->parent->options->get_user_option( 'name', $this->author_id );
 
 		$name = $this->parent->api->apply_deprecated_filters( 'resume_name', '2.5', 'name', $name );
@@ -164,7 +164,8 @@ class WP_Resume_Templating {
 	 */
 	function get_contact_info() {
 
-		$this->author_id = the_author_meta('ID');
+		
+		$this->author_id = get_the_author_meta('ID');
 		$contact_info = $this->parent->options->get_user_option( 'contact_info', $this->author_id );
 		$contact_info = $this->parent->api->apply_deprecated_filters( 'resume_contact_info', '2.5', 'contact_info', $contact_info );
 		return $this->parent->api->apply_filters( 'contact_info', $contact_info );
@@ -179,7 +180,8 @@ class WP_Resume_Templating {
 	 */
 	function get_summary() {
 
-		$this->author_id = the_author_meta('ID');
+		
+		$this->author_id = get_the_author_meta('ID');
 		$summary = $this->parent->options->get_user_option( 'summary', $this->author_id );
 		$summary = $this->parent->api->apply_deprecated_filters( 'resume_summary', '2.5', 'summary', $summary );
 		return $this->parent->api->apply_filters( 'summary', $summary );

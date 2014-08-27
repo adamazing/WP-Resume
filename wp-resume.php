@@ -252,8 +252,8 @@ class WP_Resume extends Plugin_Boilerplate_v_1 {
 			$user = get_userdata( $author );
 			$author = $user->user_nicename;
 		}
-		
-		$this->author_id = $user->id;
+				
+		$this->author_id = get_the_author_meta('ID');
 		$this->author = $author;
 
 		//get all sections ordered by term_id (order added)
